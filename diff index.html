@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Plan de Estudios Medicina - UNPAZ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .year {
+      margin-bottom: 30px;
+    }
+    .year h2 {
+      background: #0077b6;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .subject {
+      background: #90e0ef;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .subject:hover {
+      background: #00b4d8;
+    }
+    #details {
+      background: #caf0f8;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Plan de Estudios Medicina - UNPAZ</h1>
+
+  <div id="plan"></div>
+  <div id="details"></div>
+
+  <script>
+    const plan = [
+      {
+        year: "Primer Año",
+        subjects: [
+          { name: "Bases biológicas de la práctica médica I", hours: "6hs", correl: "-" },
+          { name: "Historia y salud en Argentina y Latinoamérica", hours: "3hs", correl: "-" },
+          { name: "Articulación Básico Clínico Comunitaria I", hours: "10hs", correl: "-" },
+          { name: "Salud ambiental", hours: "4hs", correl: "-" },
+          { name: "Fundamentos de Salud Comunitaria", hours: "4hs", correl: "-" },
+          { name: "Bases biológicas de la práctica médica II", hours: "6hs", correl: "6" },
+          { name: "Articulación Básico Clínico Comunitaria II", hours: "10hs", correl: "7" },
+          { name: "Sujetos, instituciones y sociedad en el campo de la salud", hours: "4hs", correl: "7,8,9,10" },
+          { name: "Alteridad y salud", hours: "4hs", correl: "13" },
+          { name: "Comunicación en el Campo de la Salud", hours: "4hs", correl: "7,8,9,10" },
+          { name: "Bases biológicas para la práctica médica III", hours: "6hs", correl: "7,8,9" },
+          { name: "Articulación Básico Clínico Comunitaria III", hours: "10hs", correl: "13" },
+          { name: "Salud sexual", hours: "4hs", correl: "7,8,9,10" },
+          { name: "Salud reproductiva", hours: "4hs", correl: "7,8,9,10" },
+          { name: "Producción y Análisis Crítico del Conocimiento en Salud", hours: "4hs", correl: "7,8,9,10" },
+          { name: "Discapacidad y rehabilitación basada en la comunidad", hours: "4hs", correl: "13" },
+        ]
+      },
+      {
+        year: "Segundo Año",
+        subjects: [
+          { name: "Bases biológicas para la práctica médica IV", hours: "4hs", correl: "4,11" },
+          { name: "Articulación Básico Clínico Comunitaria IV", hours: "10hs", correl: "12" },
+          { name: "Epidemiología", hours: "4hs", correl: "12,15" },
+          { name: "Tamizaje y Ciencias del Diagnóstico", hours: "4hs", correl: "5,11,12" },
+          { name: "Redes y Sistemas de Salud", hours: "4hs", correl: "12,15" },
+          { name: "Salud Integral de la Mujer", hours: "6hs", correl: "14" },
+        ]
+      },
+      {
+        year: "Tercer Año",
+        subjects: [
+          { name: "Medicina Interna y Campos Clínicos I", hours: "8hs", correl: "1-22" },
+          { name: "Salud Colectiva y Comunitaria", hours: "4hs", correl: "1-22" },
+          { name: "Terapéuticas y Farmacología", hours: "4hs", correl: "1-22" },
+          { name: "Salud del/a Trabajador/a, Recreación y tiempo libre", hours: "4hs", correl: "1-22" },
+          { name: "Salud del Niño, Niña y Adolescencia", hours: "6hs", correl: "1-22" },
+          { name: "Salud Mental", hours: "5hs", correl: "1-22" },
+        ]
+      },
+      {
+        year: "Cuarto y Quinto Año",
+        subjects: [
+          { name: "Medicina Interna y Campos Clínicos II", hours: "8hs", correl: "23" },
+          { name: "Medicina General", hours: "6hs", correl: "23" },
+          { name: "Programas de Salud", hours: "4hs", correl: "24" },
+          { name: "Salud de las Personas Mayores", hours: "4hs", correl: "23,25" },
+          { name: "Clínica quirúrgica y Emergentología", hours: "15hs", correl: "23,28" },
+          { name: "Bioética y Derechos Humanos", hours: "3hs", correl: "23" },
+          { name: "Medicina Legal y Toxicología", hours: "3hs", correl: "28" },
+        ]
+      },
+      {
+        year: "Práctica Final Obligatoria",
+        subjects: [
+          { name: "Práctica final obligatoria Clínica Médica", hours: "25hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Clínica Quirúrgica", hours: "30hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Primer Nivel de Atención", hours: "30hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Clínica Tocoginecológica", hours: "25hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Salud Mental", hours: "25hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Clínica Pediátrica", hours: "30hs", correl: "1-35" },
+          { name: "Práctica final obligatoria Emergencias", hours: "24hs", correl: "1-35" },
+        ]
+      },
+      {
+        year: "Optativas y Talleres",
+        subjects: [
+          { name: "Salud Internacional", hours: "3hs", correl: "19" },
+          { name: "Economía Política de la Salud", hours: "3hs", correl: "21" },
+          { name: "Cuidados paliativos y manejo del dolor", hours: "3hs", correl: "23" },
+          { name: "Gestión y acción en emergencias y desastres", hours: "3hs", correl: "23" },
+          { name: "Taller de informática aplicada a la salud", hours: "4hs", correl: "Antes de segundo ciclo" },
+          { name: "Taller de inglés Técnico I", hours: "4hs", correl: "Antes de segundo ciclo" },
+          { name: "Taller de inglés Técnico II", hours: "4hs", correl: "Antes de segundo ciclo" },
+        ]
+      }
+    ];
+
+    const container = document.getElementById("plan");
+    const details = document.getElementById("details");
+
+    plan.forEach(year => {
+      const yearDiv = document.createElement("div");
+      yearDiv.className = "year";
+      yearDiv.innerHTML = `<h2>${year.year}</h2>`;
+
+      year.subjects.forEach(subj => {
+        const subjDiv = document.createElement("div");
+        subjDiv.className = "subject";
+        subjDiv.textContent = subj.name;
+        subjDiv.addEventListener("click", () => {
+          details.style.display = "block";
+          details.innerHTML = `<h3>${subj.name}</h3>
+            <p><strong>Horas Semanales:</strong> ${subj.hours}</p>
+            <p><strong>Correlatividades:</strong> ${subj.correl}</p>`;
+        });
+        yearDiv.appendChild(subjDiv);
+      });
+
+      container.appendChild(yearDiv);
+    });
+  </script>
+</body>
+</html>
